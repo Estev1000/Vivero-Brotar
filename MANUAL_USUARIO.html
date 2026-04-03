@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - Vivero Central</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: #f8fafc;
+            color: #222;
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .manual-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #0001;
+            padding: 2rem;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #2563eb;
+        }
+
+        nav {
+            margin-bottom: 2rem;
+        }
+
+        nav a {
+            margin-right: 1rem;
+            color: #06b6d4;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .tip {
+            background: #e0f2fe;
+            border-left: 4px solid #06b6d4;
+            padding: 0.7em 1em;
+            margin: 1em 0;
+            border-radius: 6px;
+        }
+
+        ul {
+            margin-left: 1.2em;
+        }
+
+        @media (max-width: 600px) {
+            .manual-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="manual-container">
+        <h1>Manual de Usuario</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <p style="margin: 0;"><strong>Vivero Central &mdash; Sistema de Gestión</strong> &mdash; 20 de marzo de 2026
+            </p>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <a href="Manual de Usuario.pdf" download="Manual de Usuario.pdf" title="Descargar Manual en PDF"
+                    style="background: #10b981; color: white; text-decoration: none; border: none; padding: 10px 15px; border-radius: 6px; font-family: 'Outfit', sans-serif; font-weight: 500; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 4px rgba(16,185,129,0.2); cursor: pointer;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>Descargar PDF</span>
+                </a>
+                <button id="read-btn"
+                    style="background: #2563eb; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 500; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 4px rgba(37,99,235,0.2);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                    </svg>
+                    <span id="read-text">Escuchar Manual</span>
+                </button>
+            </div>
+        </div>
+        <br>
+        <nav>
+            <a href="#bienvenida">Bienvenida</a>
+            <a href="#conceptos">Conceptos básicos</a>
+            <a href="#panel">Pantalla principal</a>
+            <a href="#ventas">Registrar una venta</a>
+            <a href="#pedidos">Pedidos y entregas</a>
+            <a href="#comodatos">Comodatos</a>
+            <a href="#produccion">Producción</a>
+            <a href="#stock">Controlar el stock</a>
+            <a href="#historial">Historial de ventas</a>
+            <a href="#clientes">Clientes</a>
+            <a href="#empleados">Empleados</a>
+            <a href="#whatsapp">Enviar por WhatsApp</a>
+            <a href="#consejos">Consejos útiles</a>
+            <a href="#faq">Preguntas frecuentes</a>
+        </nav>
+
+        <h2 id="bienvenida">Bienvenida</h2>
+        <p>Este manual te ayudará a usar el sistema de gestión del <strong>Vivero Central</strong> para registrar
+            ventas, pedidos, controlar el inventario de plantas, macetas e insumos, y llevar el seguimiento de
+            producción. Está pensado para que cualquier persona, aunque no tenga experiencia técnica, pueda trabajar con
+            comodidad.</p>
+
+        <h2 id="conceptos">Conceptos básicos</h2>
+        <ul>
+            <li><b>Productos:</b> Plantas, macetas, sustratos, fertilizantes, herramientas y accesorios del vivero.</li>
+            <li><b>Clientes:</b> Particulares, negocios o comercios que compran al vivero.</li>
+            <li><b>Tipos de venta:</b> Venta a domicilio, venta comercial, suscripción semanal, suscripción quincenal.
+            </li>
+            <li><b>Comodatos:</b> Elementos del vivero (macetas, jardineras, plantas) prestados a un cliente por un
+                período determinado.</li>
+            <li><b>Producción:</b> Registro de propagación y preparación de productos en el vivero (plantines,
+                sustratos, macetas listas, etc.).</li>
+        </ul>
+
+        <h2 id="panel">Pantalla principal (Panel)</h2>
+        <p>Al ingresar al sistema verás el panel principal con los siguientes datos:</p>
+        <ul>
+            <li><b>Ventas del día:</b> total vendido en el día actual.</li>
+            <li><b>Pedidos:</b> cantidad de pedidos activos.</li>
+            <li><b>Stock Crítico:</b> productos con poco stock disponible.</li>
+            <li><b>Total Productos:</b> cantidad total de productos activos en el inventario.</li>
+            <li><b>Ventas / Pedidos Recientes:</b> tabla con las últimas operaciones del día.</li>
+            <li><b>Más Vendidos:</b> ranking de los productos más vendidos.</li>
+        </ul>
+        <div class="tip">Las campanas en la barra superior muestran alertas de stock bajo, pedidos pendientes y
+            comodatos activos.</div>
+
+        <h2 id="ventas">¿Cómo registrar una venta?</h2>
+        <ol>
+            <li>Haz clic en <b>Ventas</b> en el menú lateral y elige el tipo: <em>Venta Domicilio, Venta Comercial,
+                    Suscripción Semanal</em> o <em>Suscripción Quincenal</em>.</li>
+            <li>Busca la planta, maceta o insumo en el buscador y haz clic para agregarlo al carrito.</li>
+            <li>Si el producto no está en el inventario, usa el bloque de <b>Ingreso Manual</b> para agregarlo con
+                descripción y precio libre.</li>
+            <li>Elige el cliente o déjalo como "Consumidor Final".</li>
+            <li>Selecciona el empleado/vendedor si corresponde.</li>
+            <li>Selecciona el <b>método de pago</b>: Efectivo, Tarjeta, Transferencia o A Cuenta.</li>
+            <li>Haz clic en <b>Finalizar Venta</b>.</li>
+            <li>Imprime el ticket o compártelo por WhatsApp.</li>
+        </ol>
+        <div class="tip">Practica: Ve al menú <b>Ventas → Venta Domicilio</b> y simula la venta de una planta.</div>
+
+        <h2 id="pedidos">¿Cómo gestionar pedidos y entregas?</h2>
+        <ol>
+            <li>Ve a <b>Pedidos</b> en el menú.</li>
+            <li>Haz clic en <b>Nuevo Pedido</b>.</li>
+            <li>Completa el nombre del cliente, su WhatsApp, el producto o descripción del pedido y el monto.</li>
+            <li>Guarda el pedido. Quedará registrado como <em>Recibido</em>.</li>
+            <li>Desde el detalle del pedido puedes actualizar su estado: <em>En Preparación, En Espera de Stock, Listo
+                    para Entrega</em> o <em>Entregado</em>.</li>
+            <li>También podés definir el precio, enviar el estado al cliente por WhatsApp o descargar una imagen para
+                compartir.</li>
+        </ol>
+        <div class="tip">Practica: Crea un pedido de prueba y cambia su estado a "Listo para Entrega".</div>
+
+        <h2 id="comodatos">¿Cómo registrar un comodato?</h2>
+        <p>Los comodatos son elementos del vivero (macetas grandes, jardineras, plantas en maceta, herramientas) que se
+            prestan a un cliente por un tiempo determinado.</p>
+        <ol>
+            <li>Ve a <b>Comodatos</b> en el menú.</li>
+            <li>Haz clic en <b>Nuevo Comodato</b>.</li>
+            <li>Completa los datos del cliente: nombre, dirección y teléfono.</li>
+            <li>Indica la <b>Fecha de Alta / Entrega</b> y la <b>Fecha de Retiro / Devolución</b>.</li>
+            <li>Elige el <b>Tipo de Comodato</b>: Maceta Grande, Maceta Mediana, Jardinera, Planta en Maceta,
+                Herramientas de Jardín u Otro.</li>
+            <li>Agrega notas si es necesario y haz clic en <b>Registrar Comodato</b>.</li>
+        </ol>
+        <div class="tip">Desde el detalle del comodato podés compartir el estado con el cliente por WhatsApp o descargar
+            una imagen informativa.</div>
+
+        <h2 id="produccion">¿Cómo registrar una producción?</h2>
+        <p>El módulo de producción permite registrar qué se propagó o preparó en el vivero cada día.</p>
+        <ol>
+            <li>Ve a <b>Producción</b> en el menú.</li>
+            <li>Haz clic en <b>Nueva Producción</b>.</li>
+            <li>Indica la fecha, el tipo de producto (Plantines, Suculentas, Cactus, Lavanda, Hortensias, Sustrato,
+                Macetas, Fertilizante), la cantidad producida y el empleado responsable.</li>
+            <li>Detalla los insumos usados: semillas/plantines, fertilizantes/nutrientes (ml) y macetas/bandejas
+                utilizadas.</li>
+            <li>Agrega notas adicionales si lo necesitás.</li>
+            <li>Haz clic en <b>Registrar Producción</b>.</li>
+        </ol>
+        <div class="tip">Practica: Registra la producción de plantines del día de hoy.</div>
+
+        <h2 id="stock">¿Cómo controlar el stock?</h2>
+        <ol>
+            <li>Ve a <b>Inventario</b> en el menú.</li>
+            <li>Verás la lista de todos los productos con su código, nombre, proveedor, categoría, precio y stock
+                actual.</li>
+            <li>Usa el buscador y el filtro de categorías (Plantas, Macetas, Sustratos, Fertilizantes, Herramientas,
+                Accesorios, Servicios) para encontrar productos.</li>
+            <li>Haz clic en <b>Nuevo Producto</b> para agregar uno.</li>
+            <li>Usa los botones de editar o eliminar en cada fila para modificar o quitar un producto.</li>
+        </ol>
+        <div class="tip">Los productos con stock bajo aparecen resaltados en el panel principal. El sistema te avisa
+            automáticamente.</div>
+
+        <h2 id="historial">¿Cómo ver el historial de ventas?</h2>
+        <ol>
+            <li>Ve a <b>Reportes</b> en el menú.</li>
+            <li>Verás el total vendido, el promedio por venta, y el balance de caja del día.</li>
+            <li>La tabla de <b>Historial de Ventas</b> muestra todas las operaciones con fecha, empleado, artículos,
+                método de pago y total.</li>
+            <li>Usa los botones <b>JSON</b> o <b>Excel</b> para exportar los datos.</li>
+            <li>El botón <b>Reporte Diario</b> genera un resumen del día con el desglose por método de pago.</li>
+        </ol>
+        <div class="tip">Practica: Abre el Reporte Diario y revisa el desglose de caja del día de hoy.</div>
+
+        <h2 id="clientes">¿Cómo agregar o editar clientes?</h2>
+        <ol>
+            <li>Ve a <b>Clientes</b> en el menú.</li>
+            <li>Haz clic en <b>Nuevo Cliente</b>.</li>
+            <li>Completa nombre, dirección, teléfono y tipo de cliente (Comercial / Residencial).</li>
+            <li>Guarda. El cliente quedará disponible en el punto de venta para seleccionarlo al facturar.</li>
+        </ol>
+        <div class="tip">Practica: Crea un cliente ficticio y luego edítalo desde la lista.</div>
+
+        <h2 id="empleados">¿Cómo agregar o editar empleados?</h2>
+        <ol>
+            <li>Ve a <b>Empleados</b> en el menú.</li>
+            <li>Haz clic en <b>Nuevo Empleado</b>.</li>
+            <li>Ingresa el nombre y el porcentaje de comisión (%) que le corresponde por venta.</li>
+            <li>Guarda. En Reportes podrás ver cuánto vendió cada empleado y la comisión generada.</li>
+        </ol>
+        <div class="tip">Practica: Agrega un empleado de prueba con 5% de comisión.</div>
+
+        <h2 id="whatsapp">¿Cómo enviar comprobantes por WhatsApp?</h2>
+        <ul>
+            <li>Después de una venta, haz clic en el botón verde <b>Enviar por WhatsApp</b> en el modal de confirmación.
+            </li>
+            <li>Desde el detalle de un pedido o comodato, también podés usar el botón de WhatsApp para informar el
+                estado al cliente.</li>
+            <li>El sistema genera un mensaje ya redactado con los datos del pedido o comprobante, listo para enviar
+                desde WhatsApp Web.</li>
+            <li>También podés <b>Descargar Foto para WhatsApp</b> con un resumen visual del estado del pedido o
+                comodato.</li>
+        </ul>
+        <div class="tip">Practica: Haz una venta y prueba el botón de WhatsApp para enviarte el comprobante a vos mismo.
+        </div>
+
+        <h2 id="consejos">Consejos útiles</h2>
+        <ul>
+            <li>No te preocupes si te equivocas: podés editar o eliminar ventas, clientes y productos en cualquier
+                momento.</li>
+            <li>El sistema funciona <b>sin internet</b>: los datos se guardan en el navegador. Solo necesitás conexión
+                para WhatsApp.</li>
+            <li>Hacé <b>backups periódicos</b>: exportá los datos en JSON o Excel regularmente desde la sección
+                Reportes.</li>
+            <li>Usá la sección <b>Caja</b> para registrar entradas y salidas de dinero que no son ventas (gastos, pagos
+                de proveedores, etc.).</li>
+            <li>Si borrás toda la base de datos, solo se puede recuperar con un backup previo. ¡Exportá seguido!</li>
+        </ul>
+
+        <h2 id="faq">Preguntas frecuentes</h2>
+        <b>¿Qué hago si un producto no está en el inventario al vender?</b>
+        <div>Usá el bloque de <em>Ingreso Manual</em> en la pantalla de ventas para agregar el ítem con descripción y
+            precio libre, sin necesidad de tenerlo cargado en el inventario.</div>
+        <br>
+        <b>¿Puedo usarlo en el celular?</b>
+        <div>Sí, el diseño es adaptable a PC, tablet y smartphone.</div>
+        <br>
+        <b>¿Se pueden recuperar los datos si borro algo por error?</b>
+        <div>Sí, si tenés un backup exportado previamente. Importalo desde la sección Reportes con el botón
+            <em>Importar</em>.
+        </div>
+        <br>
+        <b>¿Cómo sé cuándo vence un comodato?</b>
+        <div>El sistema muestra la fecha de devolución en la lista de comodatos. La campana del panel te avisa cuando
+            hay comodatos próximos a vencer.</div>
+        <br>
+        <b>¿Puedo registrar ventas a granel o por cantidad personalizada?</b>
+        <div>Sí. Al agregar un producto al carrito podés modificar la cantidad antes de finalizar la venta.</div>
+
+        <hr>
+        <p style="text-align:center; color:#94a3b8;">Manual creado para Vivero Central &mdash; Sistema de Gestión.
+            &copy; 2026</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('read-btn');
+            const textSpan = document.getElementById('read-text');
+            let isPlaying = false;
+            let utterance = null;
+
+            const manualText = `Manual de Usuario. Bienvenido al sistema de gestión del Vivero Central. Este manual te ayudará a entender cómo usar el programa para registrar ventas, pedidos, comodatos y controlar el inventario de plantas, macetas e insumos. Está pensado para que cualquier persona, aunque no tenga experiencia técnica, pueda trabajar con comodidad.
+
+Conceptos básicos. Los productos del vivero incluyen plantas, macetas, sustratos, fertilizantes, herramientas y accesorios. Los clientes pueden ser particulares o negocios. Los tipos de venta son: venta a domicilio, venta comercial, suscripción semanal y suscripción quincenal. Los comodatos son elementos del vivero prestados a un cliente por un período determinado, como macetas grandes, jardineras o plantas. Y la producción es el registro de lo que se propagó o preparó en el vivero cada día.
+
+Pantalla principal. Al ingresar verás las ventas del día, pedidos activos, alertas de stock bajo y el total de productos en inventario. Las campanas en la barra superior muestran alertas importantes.
+
+Cómo registrar una venta. Haz clic en Ventas en el menú y elige el tipo de venta. Busca el producto y agrégalo al carrito. Si el producto no está en el inventario, usá el ingreso manual. Elige el cliente y el empleado, seleccioná el método de pago y haz clic en Finalizar Venta. Podés imprimir el ticket o enviarlo por WhatsApp.
+
+Cómo gestionar pedidos. Ve a Pedidos y haz clic en Nuevo Pedido. Completa los datos del cliente, el producto y el monto. Desde el detalle podés actualizar el estado del pedido y notificar al cliente por WhatsApp.
+
+Cómo registrar un comodato. Ve a Comodatos y haz clic en Nuevo Comodato. Completá los datos del cliente, las fechas de entrega y devolución, el tipo de elemento prestado y las notas necesarias. Desde el detalle podés compartir el estado por WhatsApp o descargar una imagen informativa.
+
+Cómo registrar una producción. Ve a Producción y haz clic en Nueva Producción. Indicá la fecha, el tipo de producto producido, la cantidad, el empleado responsable y los insumos utilizados. Guardá el registro.
+
+Cómo controlar el stock. Ve a Inventario para ver todos los productos. Podés filtrar por categoría, agregar nuevos productos, editarlos o eliminarlos. El sistema te avisa cuando el stock es bajo.
+
+Cómo ver el historial de ventas. Ve a Reportes para ver el resumen de ventas, el balance de caja y el historial completo. Podés exportar los datos en Excel o JSON y generar el reporte diario con el desglose por método de pago.
+
+Consejos útiles. No te preocupes si te equivocás: podés editar o eliminar datos en cualquier momento. El sistema funciona sin internet. Hacé backups periódicos exportando los datos. Usá la sección Caja para gastos y pagos que no son ventas.
+
+¡Muchos éxitos en tu trabajo en el Vivero Central!`;
+
+            window.addEventListener('beforeunload', () => {
+                window.speechSynthesis.cancel();
+            });
+
+            btn.addEventListener('click', () => {
+                if (!isPlaying) {
+                    window.speechSynthesis.cancel();
+                    utterance = new SpeechSynthesisUtterance(manualText);
+
+                    const voices = window.speechSynthesis.getVoices();
+                    const spanishVoice = voices.find(v => v.lang.startsWith('es') && (v.name.includes('Mujer') || v.name.includes('Female') || v.name.includes('Monica') || v.name.includes('Lucia') || v.name.includes('Conchita') || v.name.includes('Ximena'))) || voices.find(v => v.lang.startsWith('es'));
+
+                    if (spanishVoice) {
+                        utterance.voice = spanishVoice;
+                    }
+                    utterance.lang = 'es-ES';
+                    utterance.rate = 1.0;
+                    utterance.pitch = 1.1;
+
+                    utterance.onend = () => {
+                        isPlaying = false;
+                        btn.style.background = "#2563eb";
+                        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg><span id="read-text">Escuchar Manual</span>`;
+                    };
+
+                    window.speechSynthesis.speak(utterance);
+                    isPlaying = true;
+                    btn.style.background = "#ef4444";
+                    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg><span id="read-text">Detener Audición</span>`;
+                } else {
+                    window.speechSynthesis.cancel();
+                    isPlaying = false;
+                    btn.style.background = "#2563eb";
+                    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg><span id="read-text">Escuchar Manual</span>`;
+                }
+            });
+
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+            }
+        });
+    </script>
+</body>
+
+</html>
