@@ -994,6 +994,15 @@
                             <h2 id="report-avg-sale">$0</h2>
                         </div>
                     </div>
+                    <div class="stat-card">
+                        <div class="stat-icon products" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">
+                            <i class='bx bx-coin-stack'></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>Ganancia Histórica</h3>
+                            <h2 id="report-total-profit">$0</h2>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -1506,6 +1515,10 @@
                         <input type="number" id="p-price" required step="0.01" placeholder="0.00">
                     </div>
                     <div class="form-group">
+                        <label for="p-cost">Costo Unitario ($)</label>
+                        <input type="number" id="p-cost" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
                         <label for="p-stock">Stock Inicial</label>
                         <input type="number" id="p-stock" required placeholder="0">
                     </div>
@@ -1622,6 +1635,12 @@
                     <h2 id="daily-total-sales" style="color: var(--primary);">$0</h2>
                     <span id="daily-sales-count-label" style="font-size: 0.9rem; color: var(--text-muted);"><span
                             id="daily-sales-count">0</span> transacciones</span>
+                </div>
+
+                <div class="main-stat-card"
+                    style="background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); padding: 1.5rem; border-radius: 12px; text-align: center;">
+                    <span style="color: var(--text-muted); display: block; margin-bottom: 5px;">Ganancia Bruta de Hoy</span>
+                    <h2 id="daily-total-profit" style="color: var(--success);">$0</h2>
                 </div>
 
                 <div class="main-stat-card"

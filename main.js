@@ -1052,6 +1052,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('p-brand').value = data.brand;
             document.getElementById('p-category').value = data.category;
             document.getElementById('p-price').value = data.price;
+            document.getElementById('p-cost').value = data.cost || 0;
             document.getElementById('p-stock').value = data.stock;
         } else {
             document.getElementById('modal-title').textContent = 'Añadir Nuevo Producto';
@@ -1074,6 +1075,7 @@ document.addEventListener('DOMContentLoaded', () => {
             brand: document.getElementById('p-brand').value,
             category: document.getElementById('p-category').value,
             price: parseFloat(document.getElementById('p-price').value),
+            cost: parseFloat(document.getElementById('p-cost').value) || 0,
             stock: parseInt(document.getElementById('p-stock').value)
         };
 
@@ -1543,9 +1545,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const vehiclePlate = document.getElementById('pos-vehicle-plate').value || '';
         const cartForTicket = [...cart];
 
-        // Find client phone if registered
         const registeredClient = clients.find(c => c.name === selectedClientName);
         const clientPhone = registeredClient ? registeredClient.phone : '';
+
+        let totalCost = 0;
+        cart.forEach(item => {
+            const unitCost = item.isManual ? 0 : (inventory.find(i => i.id === item.id)?.cost || 0);
+            item.frozenCost = unitCost;
+            totalCost += (unitCost * item.qty);
+        });
 
         const newSale = {
             id: `TRX-${Date.now()}`,
@@ -1558,6 +1566,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clientPhone: clientPhone,
             items: cart.map(i => i.name).join(', '),
             total: total,
+            totalCost: totalCost,
             method: selectedPaymentMethod,
             date: new Date().toISOString()
         };
@@ -1684,7 +1693,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div style="text-align: center; margin-top: 30px; border-top: 1px solid #000; padding-top: 10px; font-size: 11px;">
                     <p>GRACIAS POR SU COMPRA</p>
-                    <p>RepuestosPOS</p>
+                    <p>${config.storeName}</p>
                 </div>
             </div>
         `;
@@ -1771,10 +1780,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateReports() {
         const totalRev = sales.reduce((acc, s) => acc + (s ? (s.total || 0) : 0), 0);
+        const totalCost = sales.reduce((acc, s) => acc + (s ? (s.totalCost || 0) : 0), 0);
         const avg = sales.length > 0 ? totalRev / sales.length : 0;
 
         document.getElementById('report-total-revenue').textContent = `$${totalRev.toLocaleString()}`;
         document.getElementById('report-avg-sale').textContent = `$${avg.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+        const profitEl = document.getElementById('report-total-profit');
+        if (profitEl) profitEl.textContent = `$${(totalRev - totalCost).toLocaleString()}`;
 
         const today = getTodayDateISO();
         const todaySales = sales.filter(s => s && s.date && s.date.startsWith(today));
@@ -2084,7 +2096,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const cajaOut = todayCaja.filter(m => m.type === 'salida').reduce((acc, m) => acc + (Number(m.amount) || 0), 0);
 
         const total = todaySales.reduce((acc, s) => acc + (Number(s.total) || 0), 0);
+        const totalCost = todaySales.reduce((acc, s) => acc + (Number(s.totalCost) || 0), 0);
         const count = todaySales.length;
+
+        const profitEl = document.getElementById('daily-total-profit');
+        if (profitEl) profitEl.textContent = `$${(total - totalCost).toLocaleString()}`;
 
         // Balance calculation: Sales + Ingresos - Egresos
         const finalBalance = total + cajaIn - cajaOut;
@@ -2254,7 +2270,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <div style="text-align: center; margin-top: 30px; border-top: 1px solid #000; padding-top: 10px; font-size: 10px;">
                     <p>REPORTE GENERADO EL ${new Date().toLocaleString()}</p>
-                    <p>RepuestosPOS Management</p>
+                    <p>${config.storeName}</p>
                 </div>
             </div>
         `;
