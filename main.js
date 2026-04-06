@@ -3,10 +3,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Data Management ---
     let inventory = JSON.parse(localStorage.getItem('repuestospos_inventory')) || [
-        { id: 1, code: 'PLAN-001', name: 'Pothos (Epipremnum aureum)', brand: 'Vivero Central', category: 'Plantas', price: 1200, stock: 30 },
-        { id: 2, code: 'PLAN-002', name: 'Helecho de Boston', brand: 'Vivero Central', category: 'Plantas', price: 1800, stock: 20 },
-        { id: 3, code: 'PLAN-003', name: 'Cactus Variados', brand: 'Vivero Central', category: 'Plantas', price: 800, stock: 50 },
-        { id: 4, code: 'PLAN-004', name: 'Lavanda', brand: 'Vivero Central', category: 'Plantas', price: 1000, stock: 25 },
+        { id: 1, code: 'PLAN-001', name: 'Pothos (Epipremnum aureum)', brand: 'Vivero Brotar', category: 'Plantas', price: 1200, stock: 30 },
+        { id: 2, code: 'PLAN-002', name: 'Helecho de Boston', brand: 'Vivero Brotar', category: 'Plantas', price: 1800, stock: 20 },
+        { id: 3, code: 'PLAN-003', name: 'Cactus Variados', brand: 'Vivero Brotar', category: 'Plantas', price: 800, stock: 50 },
+        { id: 4, code: 'PLAN-004', name: 'Lavanda', brand: 'Vivero Brotar', category: 'Plantas', price: 1000, stock: 25 },
         { id: 5, code: 'MAC-001', name: 'Maceta Terracota 15cm', brand: 'Terracotta Pro', category: 'Macetas', price: 450, stock: 40 },
         { id: 6, code: 'MAC-002', name: 'Maceta Plástico 20cm', brand: 'EcoPlast', category: 'Macetas', price: 300, stock: 60 },
         { id: 7, code: 'SUS-001', name: 'Sustrato Universal 20L', brand: 'Sustratos Plus', category: 'Sustratos', price: 900, stock: 35 },
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 9, code: 'FER-001', name: 'Fertilizante NPK 500ml', brand: 'GreenGrow', category: 'Fertilizantes', price: 750, stock: 18 },
         { id: 10, code: 'HER-001', name: 'Regadera 5L', brand: 'JardinPro', category: 'Herramientas', price: 1100, stock: 8 },
         { id: 11, code: 'ACC-001', name: 'Piedras Decorativas 500g', brand: 'DecoGarden', category: 'Accesorios', price: 500, stock: 25 },
-        { id: 12, code: 'SERV-ENVIO', name: 'Servicio de Entrega', brand: 'Vivero Central', category: 'Servicios', price: 400, stock: 999 }
+        { id: 12, code: 'SERV-ENVIO', name: 'Servicio de Entrega', brand: 'Vivero Brotar', category: 'Servicios', price: 400, stock: 999 }
     ];
 
     let sales = JSON.parse(localStorage.getItem('repuestospos_sales')) || [];
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (viewName === 'Reportes') {
             reportsView.style.display = 'block';
             updateReports();
-        } else if (viewName === 'Caja') {
+        } else if (viewName === 'Caja' || viewName === 'Caja y Gastos') {
             if (cajaView) cajaView.style.display = 'block';
             initCajaView();
         } else if (viewName === 'Clientes') {
@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 metodoLabel = '<span style="color:var(--text-muted);">-</span>';
             }
             tr.innerHTML = `
-                <td>${m.date ? new Date(m.date).toLocaleDateString() : ''}</td>
+                <td>${m.date ? new Date((m.date.length === 10) ? m.date + 'T12:00:00' : m.date).toLocaleDateString() : ''}</td>
                 <td style="${typeStyle}">${typeLabel}</td>
                 <td>${metodoLabel}</td>
                 <td>${m.concept || ''}</td>
@@ -636,7 +636,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillStyle = '#06b6d4';
         ctx.font = 'bold 40px Arial';
         ctx.textAlign = 'center';
-        ctx.fillText('VIVERO CENTRAL', 500, 130);
+        ctx.fillText('VIVERO BROTAR', 500, 130);
 
         ctx.font = 'bold 35px Arial';
         ctx.fillText('COMPROBANTE DE COMODATO', 500, 210);
@@ -671,7 +671,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ctx.fillStyle = '#475569';
         ctx.font = '25px Arial';
-        ctx.fillText('Vivero Central - Reservas', 500, 920);
+        ctx.fillText('Vivero Brotar - Reservas', 500, 920);
 
         const dlink = document.createElement('a');
         dlink.download = `COMODATO_${(t.id || '').slice(-6)}.png`;
@@ -739,7 +739,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillStyle = '#10b981';
         ctx.font = 'bold 40px Arial';
         ctx.textAlign = 'center';
-        ctx.fillText('VIVERO CENTRAL', 500, 130);
+        ctx.fillText('VIVERO BROTAR', 500, 130);
 
         ctx.font = 'bold 35px Arial';
         ctx.fillText('ESTADO DE PEDIDO', 500, 200);
@@ -774,7 +774,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ctx.fillStyle = '#475569';
         ctx.font = '25px Arial';
-        ctx.fillText('Vivero Central - Estado de Pedido', 500, 920);
+        ctx.fillText('Vivero Brotar - Estado de Pedido', 500, 920);
 
         const dlink = document.createElement('a');
         dlink.download = `PEDIDO_${r.id.slice(-6)}.png`;
@@ -1623,7 +1623,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Construct the message
         let message = `*Hola ${sale.customer || ''}!*\n`;
         message += `Aquí tienes el detalle de tu servicio:\n\n`;
-        message += `📅 Fecha: ${new Date(sale.date).toLocaleDateString()}\n`;
+        const localDate = sale.date.includes('T') ? new Date(sale.date) : new Date(sale.date + 'T12:00:00');
+        message += `📅 Fecha: ${localDate.toLocaleDateString()}\n`;
         if (sale.vehicle) message += `🚗 Vehículo: ${sale.vehicle}\n`;
         message += `📋 Trabajo/Productos: ${sale.items}\n`;
         message += `💰 *Total: $${sale.total.toLocaleString()}*\n\n`;
@@ -1647,7 +1648,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const ticketArea = document.getElementById('ticket-print-area');
         if (!sale) return;
 
-        const dateStr = new Date(sale.date).toLocaleString();
+        const localDate = sale.date.includes('T') ? new Date(sale.date) : new Date(sale.date + 'T12:00:00');
+        const dateStr = localDate.toLocaleString();
         let itemsHtml = '';
 
         if (items && items.length > 0) {
@@ -1783,28 +1785,37 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalCost = sales.reduce((acc, s) => acc + (s ? (s.totalCost || 0) : 0), 0);
         const avg = sales.length > 0 ? totalRev / sales.length : 0;
 
+        const totalOutAllTime = cajaMovs.filter(m => m.type === 'salida').reduce((acc, m) => acc + Number(m.amount || 0), 0);
+        
         document.getElementById('report-total-revenue').textContent = `$${totalRev.toLocaleString()}`;
         document.getElementById('report-avg-sale').textContent = `$${avg.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
         const profitEl = document.getElementById('report-total-profit');
-        if (profitEl) profitEl.textContent = `$${(totalRev - totalCost).toLocaleString()}`;
+        if (profitEl) profitEl.textContent = `$${(totalRev - totalCost - totalOutAllTime).toLocaleString()}`;
 
         const today = getTodayDateISO();
         const todaySales = sales.filter(s => s && s.date && s.date.startsWith(today));
         const todayTotalSales = todaySales.reduce((acc, s) => acc + (Number(s.total) || 0), 0);
+        const todayTotalCost = todaySales.reduce((acc, s) => acc + (Number(s.totalCost) || 0), 0);
 
         const dayMovs = cajaMovs.filter(m => m && m.date && String(m.date).startsWith(today));
         const inDay = dayMovs.filter(m => m.type === 'entrada').reduce((acc, m) => acc + Number(m.amount || 0), 0);
         const outDay = dayMovs.filter(m => m.type === 'salida').reduce((acc, m) => acc + Number(m.amount || 0), 0);
 
-        // Final balance for the day: Sales + Caja In - Caja Out
-        const balDay = todayTotalSales + inDay - outDay;
+        // Ganancia Neta del Día = Ventas - Costo - Gastos
+        const netProfitDay = todayTotalSales - todayTotalCost - outDay;
 
+        const salesDayEl = document.getElementById('report-sales-day');
         const inEl = document.getElementById('report-caja-in');
         const outEl = document.getElementById('report-caja-out');
-        const balEl = document.getElementById('report-caja-balance');
+        const netDayEl = document.getElementById('report-net-profit-day');
+        // If element exists (backwards compatibility), update it
+        const balEl = document.getElementById('report-caja-balance'); 
+
+        if (salesDayEl) salesDayEl.textContent = `$${todayTotalSales.toLocaleString()}`;
         if (inEl) inEl.textContent = `$${inDay.toLocaleString()}`;
         if (outEl) outEl.textContent = `$${outDay.toLocaleString()}`;
-        if (balEl) balEl.textContent = `$${balDay.toLocaleString()}`;
+        if (netDayEl) netDayEl.textContent = `$${netProfitDay.toLocaleString()}`;
+        if (balEl) balEl.textContent = `$${(todayTotalSales + inDay - outDay).toLocaleString()}`;
 
         const cajaTable = document.getElementById('report-caja-table');
         if (cajaTable) {
@@ -1819,7 +1830,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const typeStyle = m.type === 'entrada' ? 'color: var(--success); font-weight: 600;' : 'color: var(--danger); font-weight: 600;';
                     const amountTxt = `$${Number(m.amount || 0).toLocaleString()}`;
                     tr.innerHTML = `
-                        <td>${m.date ? new Date(m.date).toLocaleDateString() : ''}</td>
+                        <td>${m.date ? new Date((m.date.length === 10) ? m.date + 'T12:00:00' : m.date).toLocaleDateString() : ''}</td>
                         <td style="${typeStyle}">${typeLabel}</td>
                         <td><span class="status completed" style="background: rgba(255,255,255,0.05); color: var(--text-muted); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">${m.method || '-'}</span></td>
                         <td>${m.concept || ''}</td>
@@ -1834,7 +1845,8 @@ document.addEventListener('DOMContentLoaded', () => {
         table.innerHTML = '';
         sales.forEach(s => {
             if (!s) return;
-            const dateStr = s.date ? (new Date(s.date).toLocaleDateString() + ' ' + new Date(s.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })) : '---';
+            const safeSaleDate = (s.date && s.date.length === 10) ? s.date + 'T12:00:00' : s.date;
+            const dateStr = s.date ? (new Date(safeSaleDate).toLocaleDateString() + ' ' + new Date(safeSaleDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })) : '---';
             const tr = document.createElement('tr');
             const clientDisplay = (s.customer || 'Desconocido') + (s.subClient ? ` (${s.subClient})` : '') + (s.vehicle ? ` - [${s.vehicle}]` : '');
             const statusClass = s.method === 'A Cuenta' ? 'pending' : 'completed';

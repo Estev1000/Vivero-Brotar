@@ -119,7 +119,7 @@
                 <li>
                     <a href="#">
                         <i class='bx bx-wallet'></i>
-                        <span>Caja</span>
+                        <span>Caja y Gastos</span>
                     </a>
                 </li>
                 <li>
@@ -999,7 +999,7 @@
                             <i class='bx bx-coin-stack'></i>
                         </div>
                         <div class="stat-details">
-                            <h3>Ganancia Histórica</h3>
+                            <h3>Ganancia Neta Total</h3>
                             <h2 id="report-total-profit">$0</h2>
                         </div>
                     </div>
@@ -1007,28 +1007,35 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h3>Caja (Día)</h3>
+                        <h3>Reporte del Día (Ventas, Gastos y Caja)</h3>
                     </div>
                     <div class="stats-grid" style="padding: 0 0 1.5rem;">
                         <div class="stat-card">
+                            <div class="stat-icon revenue"><i class='bx bx-shopping-bag'></i></div>
+                            <div class="stat-details">
+                                <h3>Ventas del Día</h3>
+                                <h2 id="report-sales-day">$0</h2>
+                            </div>
+                        </div>
+                        <div class="stat-card">
                             <div class="stat-icon revenue"><i class='bx bx-log-in'></i></div>
                             <div class="stat-details">
-                                <h3>Entradas</h3>
+                                <h3>Ingresos Extra</h3>
                                 <h2 id="report-caja-in">$0</h2>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon orders"><i class='bx bx-log-out'></i></div>
                             <div class="stat-details">
-                                <h3>Salidas</h3>
+                                <h3>Gastos (Salidas)</h3>
                                 <h2 id="report-caja-out">$0</h2>
                             </div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-icon customers"><i class='bx bx-calculator'></i></div>
+                        <div class="stat-card" style="border: 1px solid var(--success);">
+                            <div class="stat-icon customers" style="background: rgba(16, 185, 129, 0.2); color: #10b981;"><i class='bx bx-money'></i></div>
                             <div class="stat-details">
-                                <h3>Saldo</h3>
-                                <h2 id="report-caja-balance">$0</h2>
+                                <h3 style="color: var(--success);">Ganancia Neta del Día</h3>
+                                <h2 id="report-net-profit-day" style="color: var(--success);">$0</h2>
                             </div>
                         </div>
                     </div>
