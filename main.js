@@ -1555,6 +1555,9 @@ document.addEventListener('DOMContentLoaded', () => {
             totalCost += (unitCost * item.qty);
         });
 
+        // Get local date (YYYY-MM-DD) instead of UTC to match filter logic
+        const today = new Date();
+        const saleDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
         const newSale = {
             id: `TRX-${Date.now()}`,
             customer: selectedClientName,
@@ -1568,10 +1571,22 @@ document.addEventListener('DOMContentLoaded', () => {
             total: total,
             totalCost: totalCost,
             method: selectedPaymentMethod,
-            date: new Date().toISOString()
+            date: saleDate
         };
 
         sales.unshift(newSale);
+
+        // Register cash movement (entrada de dinero)
+        const cajaDate = saleDate; // Use same date as sale for consistency
+        const cajaMovement = {
+            id: Date.now(),
+            date: cajaDate,
+            type: 'entrada',
+            concept: `Venta - ${newSale.customer} (${newSale.id})`,
+            amount: total,
+            method: selectedPaymentMethod
+        };
+        cajaMovs.unshift(cajaMovement);
 
         // Update Stock
         cart.forEach(cartItem => {
@@ -1724,7 +1739,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const badgeTurnos = document.getElementById('badge-turnos');
         if (badgeTurnos) badgeTurnos.textContent = totalComodatos;
 
-        const todaySales = sales.filter(s => s && s.date && s.date.startsWith(today));
+        const todaySales = sales.filter(s => {
+            if (!s || !s.date) return false;
+            // Handle both full ISO format and date-only format
+            let saleDate;
+            if (String(s.date).includes('T')) {
+                // ISO format: parse as Date to get local date
+                const d = new Date(s.date);
+                saleDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+            } else {
+                saleDate = String(s.date);
+            }
+            return saleDate === today;
+        });
         const totalSalesVal = todaySales.reduce((acc, s) => acc + (s.total || 0), 0);
 
         document.getElementById('stat-sales').textContent = `$${totalSalesVal.toLocaleString()}`;
@@ -1793,7 +1820,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (profitEl) profitEl.textContent = `$${(totalRev - totalCost - totalOutAllTime).toLocaleString()}`;
 
         const today = getTodayDateISO();
-        const todaySales = sales.filter(s => s && s.date && s.date.startsWith(today));
+        const todaySales = sales.filter(s => {
+            if (!s || !s.date) return false;
+            // Handle both full ISO format and date-only format
+            let saleDate;
+            if (String(s.date).includes('T')) {
+                // ISO format: parse as Date to get local date
+                const d = new Date(s.date);
+                saleDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+            } else {
+                saleDate = String(s.date);
+            }
+            return saleDate === today;
+        });
         const todayTotalSales = todaySales.reduce((acc, s) => acc + (Number(s.total) || 0), 0);
         const todayTotalCost = todaySales.reduce((acc, s) => acc + (Number(s.totalCost) || 0), 0);
 
@@ -2101,7 +2140,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Daily Report Logic ---
     function openDailyReportModal() {
         const today = getTodayDateISO();
-        const todaySales = sales.filter(s => s && s.date && s.date.startsWith(today));
+        const todaySales = sales.filter(s => {
+            if (!s || !s.date) return false;
+            // Handle both full ISO format and date-only format
+            let saleDate;
+            if (String(s.date).includes('T')) {
+                // ISO format: parse as Date to get local date
+                const d = new Date(s.date);
+                saleDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+            } else {
+                saleDate = String(s.date);
+            }
+            return saleDate === today;
+        });
 
         const todayCaja = cajaMovs.filter(m => m && m.date && String(m.date).startsWith(today));
         const cajaIn = todayCaja.filter(m => m.type === 'entrada').reduce((acc, m) => acc + (Number(m.amount) || 0), 0);
@@ -2193,7 +2244,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function printDailyReport() {
         const today = getTodayDateISO();
-        const todaySales = sales.filter(s => s && s.date && s.date.startsWith(today));
+        const todaySales = sales.filter(s => {
+            if (!s || !s.date) return false;
+            // Handle both full ISO format and date-only format
+            let saleDate;
+            if (String(s.date).includes('T')) {
+                // ISO format: parse as Date to get local date
+                const d = new Date(s.date);
+                saleDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+            } else {
+                saleDate = String(s.date);
+            }
+            return saleDate === today;
+        });
 
         const todayCaja = cajaMovs.filter(m => m && m.date && String(m.date).startsWith(today));
         const cajaIn = todayCaja.filter(m => m.type === 'entrada').reduce((acc, m) => acc + (Number(m.amount) || 0), 0);
